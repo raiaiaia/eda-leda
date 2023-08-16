@@ -8,6 +8,9 @@ public class ElementosDuplicados {
         Scanner sc = new Scanner(System.in);
 
         String[] values = sc.nextLine().split(" ");
+
+        sc.close();
+        
         System.out.println(verificaDuplicados(values));
 
     }

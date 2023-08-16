@@ -40,8 +40,9 @@ public class RepositorioProdutoArrayList {
 	 * @return
 	 */
 	private int procurarIndice(int codigo) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		Produto p = new Produto(codigo, null, 0, null);
+		return this.produtos.indexOf(p);
+		
 	}
 
 	/**
@@ -51,16 +52,17 @@ public class RepositorioProdutoArrayList {
 	 * @return
 	 */
 	public boolean existe(int codigo) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if(procurarIndice(codigo) != -1){
+			return true;
+		}
+		return false;
 	}
 
 	/**
 	 * Insere um novo produto (sem se preocupar com duplicatas)
 	 */
 	public void inserir(Produto produto) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		produtos.add(produto);
 	}
 
 	/**
@@ -69,8 +71,14 @@ public class RepositorioProdutoArrayList {
 	 * utilizado.
 	 */
 	public void atualizar(Produto produto) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		int codigo = produto.getCodigo();
+
+		if(procurarIndice(codigo) != -1){
+			produtos.remove(produto);
+			produtos.add(produto);
+		}else{
+			throw new NullPointerException("Produto inexistente na lista de produtos!");
+		}
 	}
 
 	/**
@@ -81,8 +89,14 @@ public class RepositorioProdutoArrayList {
 	 * @param codigo
 	 */
 	public void remover(int codigo) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		Produto p = new Produto(codigo, null, 0, null);
+	
+		if(existe(codigo)){
+			produtos.remove(p);
+		}else{
+			throw new NullPointerException("Produto inexistente na lista de produtos!");
+		}
+
 	}
 
 	/**
@@ -93,7 +107,15 @@ public class RepositorioProdutoArrayList {
 	 * @return
 	 */
 	public Produto procurar(int codigo) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		Produto p = null;
+		int index = this.procurarIndice(codigo);
+
+		if(index != -1){
+			p = (Produto) this.produtos.get(index);
+			return p;
+		}else{
+			throw new NullPointerException("Produto inexistente!");
+		}
+		
 	}
 }

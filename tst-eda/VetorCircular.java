@@ -10,6 +10,8 @@ public class VetorCircular {
         String[] values = sc.nextLine().split(" ");
         int rep = parseInt(sc.nextLine());
 
+        sc.close();
+
         String out = "";
 
         int i = 0;
