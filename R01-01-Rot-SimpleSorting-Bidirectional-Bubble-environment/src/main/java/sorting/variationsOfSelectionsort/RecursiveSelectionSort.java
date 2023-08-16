@@ -13,30 +13,33 @@ public class RecursiveSelectionSort<T extends Comparable<T>> extends
 	 * algoritmo e depois o caso indutivo, que reduz o problema para uma entrada
 	 * menor em uma chamada recursiva. Seu algoritmo deve ter complexidade
 	 * quadrática O(n^2).
-	 * 
-	 * 10 2 4 1 -1
 	 */
+	
 	@Override
 	public void sort(T[] array, int leftIndex, int rightIndex) {
 
 		if(array != null && array.length != 0 && leftIndex >= 0 && rightIndex <= array.length -1){
 
-			int smallestIndex = leftIndex;
-			
-			for(int i= leftIndex; i <= rightIndex; i++){
-				if(array[i].compareTo(array[smallestIndex]) < 0){
-				smallestIndex = i;
-				}
-			}
-
-			Util.swap(array,leftIndex,smallestIndex);
-
 			if(leftIndex < rightIndex){
+				selectionMinimun(array, leftIndex, rightIndex);
 				sort(array, ++leftIndex, rightIndex);
 			}
 		
 		}
 	
+	}
+
+	public void selectionMinimun(T[] array, int leftIndex, int rightIndex){
+
+		if(leftIndex >= rightIndex){
+			return;
+		}
+
+		if(array[leftIndex].compareTo(array[leftIndex+1]) > 0){
+			Util.swap(array, leftIndex, leftIndex+1);
+		}
+
+		selectionMinimun(array, ++leftIndex, rightIndex);
 	}
 
 }
