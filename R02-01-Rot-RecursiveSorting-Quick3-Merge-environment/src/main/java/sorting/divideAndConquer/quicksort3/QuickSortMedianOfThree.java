@@ -20,7 +20,33 @@ public class QuickSortMedianOfThree<T extends Comparable<T>> extends
 		AbstractSorting<T> {
 
 	public void sort(T[] array, int leftIndex, int rightIndex) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if(leftIndex < rightIndex){
+			int pivotIndex = partition(array, leftIndex, rightIndex);
+			sort(array, leftIndex, pivotIndex - 1);
+			sort(array, pivotIndex + 1, rightIndex);
+		}
+	}
+
+	private int pivot(T[] array, int leftIndex, int rightIndex){
+		
+	}
+
+	private int partition(T[] array, int leftIndex, int rightIndex, T pivot) {
+
+        int i = leftIndex;
+        for(int j = i + 1; j <= rightIndex; j++){
+            if(array[j].compareTo(pivot) < 0){
+                i++;
+                swap(array, i, j);
+            }
+        }
+        swap(array, leftIndex, i);
+        return i;
+	}
+
+	private void swap(T[] array, int i, int j) {
+		T aux = array[i];
+		array[i] = array[j];
+		array[j] = aux;
 	}
 }

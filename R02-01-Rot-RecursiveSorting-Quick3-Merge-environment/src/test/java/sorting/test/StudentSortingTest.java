@@ -7,6 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import sorting.AbstractSorting;
+import sorting.divideAndConquer.MergeSort;
+import sorting.divideAndConquer.QuickSort;
 
 public class StudentSortingTest {
 
@@ -15,6 +17,14 @@ public class StudentSortingTest {
 	private Integer[] vetorVazio = {};
 	private Integer[] vetorValoresRepetidos;
 	private Integer[] vetorValoresIguais;
+
+
+	//Meus testes
+	private Integer[] vetorOrdenado;
+	private Integer[] vetorOrdenadoCrescente;
+	private Integer[] vetorOrdenadoDecrescente;
+	private Integer[] vetorOrdenadoUltimoElemento;
+	private Integer[] vetorOrdenadoPrimeiroElemento;
 
 	public AbstractSorting<Integer> implementation;
 
@@ -28,6 +38,14 @@ public class StudentSortingTest {
 		populaVetorIgual(new Integer[] { 6, 6, 6, 6, 6, 6 });
 
 		getImplementation();
+
+
+		//Meus testes
+		populaVetorOrdenado(new Integer[] {1, 7, 18, 29, 110});
+		populaVetorOrdenadoCrescente(new Integer[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
+		populaVetorOrdenadoDecrescente(new Integer[] {10, 5, 3, -1, -15});
+		populaVetorOrdenadoUltimoElemento(new Integer[] {1, 2, 3, 4, 5, 0});
+		populaVetorOrdenadoPrimeiroElemento(new Integer[] {10, 2, 3, 4});
 	}
 
 	// // MÉTODOS AUXILIARES DA INICIALIZAÇÃO
@@ -38,8 +56,8 @@ public class StudentSortingTest {
 	private void getImplementation() {
 		// TODO O aluno deve instanciar sua implementação abaixo ao invés de
 		// null
-		this.implementation = null;
-		Assert.fail("Implementation not provided");
+		this.implementation = new QuickSort<Integer>();
+		//Assert.fail("Implementation not provided");
 	}
 
 	public void populaVetorTamanhoPar(Integer[] arrayPadrao) {
@@ -58,6 +76,23 @@ public class StudentSortingTest {
 	public void populaVetorIgual(Integer[] arrayPadrao) {
 		this.vetorValoresIguais = Arrays
 				.copyOf(arrayPadrao, arrayPadrao.length);
+	}
+
+	//Meus testes
+	private void populaVetorOrdenadoCrescente(Integer[] arrayPadrao) {
+		this.vetorOrdenadoCrescente = Arrays.copyOf(arrayPadrao, arrayPadrao.length);
+	}
+	private void populaVetorOrdenado(Integer[] arrayPadrao) {
+		this.vetorOrdenado = Arrays.copyOf(arrayPadrao, arrayPadrao.length);
+	}
+	private void populaVetorOrdenadoDecrescente(Integer[] arrayPadrao) {
+		this.vetorOrdenadoDecrescente = Arrays.copyOf(arrayPadrao, arrayPadrao.length);
+	}
+	private void populaVetorOrdenadoUltimoElemento(Integer[] arrayPadrao) {
+		this.vetorOrdenadoUltimoElemento = Arrays.copyOf(arrayPadrao, arrayPadrao.length);
+	}
+	private void populaVetorOrdenadoPrimeiroElemento(Integer[] arrayPadrao) {
+		this.vetorOrdenadoPrimeiroElemento = Arrays.copyOf(arrayPadrao, arrayPadrao.length);
 	}
 
 	// FIM DOS METODOS AUXILIARES DA INICIALIZAÇÃO
@@ -106,4 +141,30 @@ public class StudentSortingTest {
 	 * SEGUIR A ESTRUTURA DOS MÉTODOS DE TESTE ACIMA DESCRITOS, ORDENANDO APENAS
 	 * UMA PARTE DO ARRAY.
 	 */
+
+
+	 @Test
+	 public void testSort06(){
+		genericTest(vetorOrdenado);
+	 }
+
+	 @Test
+	 public void testSort07(){
+		genericTest(vetorOrdenadoCrescente);
+	 }
+
+	 @Test
+	 public void testSort08(){
+		genericTest(vetorOrdenadoDecrescente);
+	 }
+
+	 @Test
+	 public void testSort09(){
+		genericTest(vetorOrdenadoPrimeiroElemento);
+	 }
+
+	 @Test
+	 public void testSort10(){
+		genericTest(vetorOrdenadoUltimoElemento);
+	 }
 }
