@@ -1,6 +1,7 @@
 package sorting.divideAndConquer.quicksort3;
 
 import sorting.AbstractSorting;
+import util.Util;
 
 /**
  * A classe QuickSortMedianOfThree representa uma variação do QuickSort que
@@ -27,26 +28,35 @@ public class QuickSortMedianOfThree<T extends Comparable<T>> extends
 		}
 	}
 
-	private int pivot(T[] array, int leftIndex, int rightIndex){
-		
-	}
-
-	private int partition(T[] array, int leftIndex, int rightIndex, T pivot) {
-
+	private int partition(T[] array, int leftIndex, int rightIndex) {
+		pivotMedianOfThree(array, leftIndex, rightIndex);
+		T pivot = array[leftIndex];
         int i = leftIndex;
         for(int j = i + 1; j <= rightIndex; j++){
             if(array[j].compareTo(pivot) < 0){
                 i++;
-                swap(array, i, j);
+                Util.swap(array, i, j);
             }
         }
-        swap(array, leftIndex, i);
+        Util.swap(array, leftIndex, i);
         return i;
 	}
 
-	private void swap(T[] array, int i, int j) {
-		T aux = array[i];
-		array[i] = array[j];
-		array[j] = aux;
+	private void pivotMedianOfThree(T[] array, int leftIndex, int rightIndex){
+		int middleIndex = (rightIndex + leftIndex)/2;
+		T[] candidates = (T[]) new Comparable[]{array[leftIndex], array[middleIndex], array[rightIndex]};
+		Integer[] candidatesIndex = new Integer[]{leftIndex, middleIndex, rightIndex};
+
+		for(int i=0; i<candidates.length-1; i++){
+			int smallestIndex = i;
+			for(int j=i+1; j<candidates.length-1; j++){
+				if(array[j].compareTo(array[smallestIndex]) < 0){
+					smallestIndex = j;
+				}
+			}
+			Util.swap(candidates, i, smallestIndex);
+			Util.swap(candidatesIndex, i, smallestIndex);
+		}
+		Util.swap(array, candidatesIndex[1], rightIndex-1);
 	}
 }
