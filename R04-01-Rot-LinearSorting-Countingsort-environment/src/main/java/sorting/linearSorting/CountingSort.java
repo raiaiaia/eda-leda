@@ -1,7 +1,5 @@
 package sorting.linearSorting;
 
-import java.util.Arrays;
-
 import sorting.AbstractSorting;
 
 /**
@@ -19,36 +17,38 @@ public class CountingSort extends AbstractSorting<Integer> {
 
 	@Override
 	public void sort(Integer[] array, int leftIndex, int rightIndex) {
-		int k = encontraMaior(array, leftIndex, rightIndex);
-		int[] c = new int[k+1];
-		//frequencia 
-		for(int i=leftIndex; i < rightIndex; i++){	
-			c[array[i]]++;	
-		}
-		//cumulativa
-		for(int i=1; i < c.length; i++){
-			c[i] += c[i-1];
-		}
 
-		Integer[] b = Arrays.copyOf(array, array.length);
-		for(int i=rightIndex-1; i >= leftIndex; i--){
-			b[c[array[i]]-1] = array[i];
-			c[array[i]]--;
-		}
+		if(array.length > 0){
+			int k = encontraMaior(array, leftIndex, rightIndex);
+			int[] c = new int[k+1];
 
-		//copiar os valores ordenados de "b" para "array"
-		for(int i=0; i<b.length; i++){
-			array[i] = b[i];
+			//frequencia 
+			for(int i=leftIndex; i <= rightIndex; i++)	
+				c[array[i]]++;	
+			
+			//cumulativa
+			for(int i=1; i < c.length; i++)
+			    c[i] += c[i-1];
+			
+			int[] b = new int[rightIndex - leftIndex + 1];
+
+			for(int i=rightIndex; i >= leftIndex; i--){
+				b[c[array[i]]-1] = array[i];
+				c[array[i]]--;
+			}
+
+			int j = leftIndex;
+			//copiar os valores ordenados de "b" para "array"
+			for(int i=0; i<b.length; i++)
+				if(i == j) array[i] = b[j++];
 		}
 	}
 
 	private int encontraMaior(Integer[] array, int leftIndex, int rightIndex){
-		int maior = 0;
-		for(int i = leftIndex; i < rightIndex; i++){
-			if(array[i] > maior){
-				maior = array[i];
-			}
-		}
+		int maior = array[leftIndex];
+		for(int i = leftIndex; i <= rightIndex; i++)
+			if(array[i] > maior) maior = array[i];
+		
 		return maior;
 	}
 }

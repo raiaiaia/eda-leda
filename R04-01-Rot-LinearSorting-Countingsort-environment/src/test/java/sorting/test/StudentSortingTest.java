@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import sorting.AbstractSorting;
 import sorting.linearSorting.CountingSort;
+import sorting.linearSorting.ExtendedCountingSort;
 
 public class StudentSortingTest {
 
@@ -16,7 +17,7 @@ public class StudentSortingTest {
 	private Integer[] vetorVazio = {};
 	private Integer[] vetorValoresRepetidos;
 	private Integer[] vetorValoresIguais;
-
+	private Integer[] teste;
 	public AbstractSorting<Integer> implementation;
 
 	@Before
@@ -27,9 +28,12 @@ public class StudentSortingTest {
 				11, 18, 36 });
 		populaVetorRepetido(new Integer[] { 4, 9, 3, 4, 0, 5, 1, 4 });
 		populaVetorIgual(new Integer[] { 6, 6, 6, 6, 6, 6 });
+		populaVetorTeste(new Integer[] { 1, 2 });
 
 		getImplementation();
 	}
+
+	
 
 	// // MÉTODOS AUXILIARES DA INICIALIZAÇÃO
 	/**
@@ -39,12 +43,15 @@ public class StudentSortingTest {
 	private void getImplementation() {
 		// TODO O aluno deve instanciar sua implementação abaixo ao invés de
 		// null
-		this.implementation = new CountingSort();
+		this.implementation = new ExtendedCountingSort();
 		//Assert.fail("Implementation not provided");
 	}
 
 	public void populaVetorTamanhoPar(Integer[] arrayPadrao) {
 		this.vetorTamPar = Arrays.copyOf(arrayPadrao, arrayPadrao.length);
+	}
+	private void populaVetorTeste(Integer[] integers) {
+		this.teste = Arrays.copyOf(integers, integers.length);
 	}
 
 	public void populaVetorTamanhoImpar(Integer[] arrayPadrao) {
@@ -98,6 +105,11 @@ public class StudentSortingTest {
 	@Test
 	public void testSort05() {
 		genericTest(vetorValoresRepetidos);
+	}
+
+	@Test
+	public void testSort06(){
+		genericTest(teste);
 	}
 
 	// MÉTODOS QUE OS ALUNOS PODEM CRIAR
