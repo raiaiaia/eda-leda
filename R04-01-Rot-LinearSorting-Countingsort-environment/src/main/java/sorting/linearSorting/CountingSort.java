@@ -40,7 +40,7 @@ public class CountingSort extends AbstractSorting<Integer> {
 			int j = leftIndex;
 			//copiar os valores ordenados de "b" para "array"
 			for(int i=0; i<b.length; i++)
-				if(i == j) array[i] = b[j++];
+				if(i == j) array[j++] = b[i];
 		}
 	}
 
