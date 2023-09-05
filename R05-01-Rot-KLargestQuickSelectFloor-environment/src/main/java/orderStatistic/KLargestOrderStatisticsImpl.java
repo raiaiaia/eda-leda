@@ -31,8 +31,13 @@ public class KLargestOrderStatisticsImpl<T extends Comparable<T>> implements KLa
 
 	@Override
 	public T[] getKLargest(T[] array, int k) {
+		T[] response = (T[]) new Comparable[]{};
 		
-		
+		if(array != null && array.length > 0 && k <= array.length && k > 0){
+			response = orderStatistics(array, k);
+		}
+
+		return response;
 	}
 
 	/**
@@ -46,21 +51,43 @@ public class KLargestOrderStatisticsImpl<T extends Comparable<T>> implements KLa
 	 * @param k
 	 * @return
 	 */
-	public T orderStatistics(T[] array, int k){
-			
+	public T[] orderStatistics(T[] array, int k){
+		
+		T[] largests = (T[]) new Comparable[k];
+		int index = select(array, (array.length - k), 0, array.length-1);
+		
+		for(int i=0; i < largests.length; i++){
+			largests[i] = array[++index];
+		}
+		return largests;
 	}
+	
+	private int select(T[] array, int k, int leftIndex, int rightIndex){
+		int output = -1;
 
-	private int particiona(T[] array){
-		T pivot = array[0];
-		int i = 0;
-
-		for(int j = i+1; j < array.length; j++) {
-			if(array[j].compareTo(pivot) > 0) {
-				i++;
-				Util.swap(array, i, j);
+		if(leftIndex <= rightIndex){
+			int pivotIndex = partition(array, leftIndex, rightIndex);
+			if(pivotIndex == k-1){
+				output = pivotIndex;
+			} else if(pivotIndex > k-1){
+				output = select(array, k, leftIndex, pivotIndex-1);
+			} else if(pivotIndex < k-1){
+				output = select(array, k, pivotIndex+1, rightIndex);
 			}
 		}
-		Util.swap(array, i, 0);
+		return output;
+	}
+
+	private int partition(T[] array, int leftIndex, int rightIndex) {
+		T pivot = array[leftIndex];
+		int i = leftIndex;
+
+		for(int j = i+1; j<= rightIndex; j++){
+			if(array[j].compareTo(pivot) < 0)
+				Util.swap(array, ++i, j);
+		}
+
+		Util.swap(array, leftIndex, i);
 		return i;
 	}
 }
