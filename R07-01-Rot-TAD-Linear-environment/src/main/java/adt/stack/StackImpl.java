@@ -33,7 +33,6 @@ public class StackImpl<T> implements Stack<T> {
 
 	@Override
 	public void push(T element) throws StackOverflowException {
-		
 		if(this.isFull()){
 			throw new StackOverflowException();
 		}else{

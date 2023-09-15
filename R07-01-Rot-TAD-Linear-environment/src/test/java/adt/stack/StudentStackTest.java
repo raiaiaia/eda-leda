@@ -80,7 +80,7 @@ public class StudentStackTest {
 
 	@Test(expected = StackUnderflowException.class)
 	public void testPopComErro() throws StackUnderflowException {
-		assertEquals(new Integer(3), stack1.pop()); // remove 3 (FIFO)
+		assertEquals(new Integer(3), stack1.pop()); // remove 3 (FILO)
 		assertEquals(new Integer(2), stack1.pop()); // remove 2
 		assertEquals(new Integer(1), stack1.pop()); // remove 1
 		assertEquals(new Integer(3), stack1.pop()); //lança o erro, stack vazia
