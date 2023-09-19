@@ -16,30 +16,53 @@ public class CircularQueue<T> implements Queue<T> {
 
 	@Override
 	public void enqueue(T element) throws QueueOverflowException {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if(this.isFull()) throw new QueueOverflowException();
+		if(isEmpty()){
+			this.head = 0;
+			this.tail = 0;
+			this.array[0] = element;
+		}
+		if(!isFull()){
+			int size = this.array.length;
+			this.tail = (this.tail + 1) % size;
+			this.array[this.tail] = element;
+			this.elements++;
+		}
 	}
 
 	@Override
 	public T dequeue() throws QueueUnderflowException {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		T resp;
+		if(this.isEmpty()){
+			throw new QueueUnderflowException();
+		}else{
+			resp = this.array[this.head];
+			int size = this.array.length;
+			this.head = (this.head + 1) % size;
+			this.elements--;
+		}
+		return resp;
 	}
 
 	@Override
 	public T head() {
-		return this.array[this.head];
+		T resp;
+		if(this.isEmpty()){
+			resp = null;
+		}else{
+			int size = this.array.length-1;
+			resp = this.array[(this.head + 1) % size];
+		} 
+		return resp;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		return this.head == -1;
+		return this.elements == 0;
 	}
 
 	@Override
 	public boolean isFull() {
-		int size = this.array.length;
-		return tail == (size-1);
+		return this.elements == this.array.length;
 	}
-
-}
+}	
