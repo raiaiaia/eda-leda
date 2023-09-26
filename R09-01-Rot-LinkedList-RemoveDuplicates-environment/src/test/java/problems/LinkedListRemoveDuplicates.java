@@ -16,7 +16,7 @@ public class LinkedListRemoveDuplicates {
     @Before
     public void setUp(){
 
-        lista1.insert();
+        //lista1.insert();
 
     }
 
