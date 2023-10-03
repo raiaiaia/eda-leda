@@ -64,8 +64,8 @@ public class HashtableOpenAddressLinearProbingImpl<T extends Storable> extends
 				int hashCode = ((HashFunctionLinearProbing<T>) this.hashFunction).hash(element, probTimes);
 				if(this.table[hashCode] != null) {
 					if(this.table[hashCode].equals(element)){
-					out = (T) this.table[hashCode];
-					found = true;
+						out = (T) this.table[hashCode];
+						found = true;
 					}
 				}
 				probTimes++;
