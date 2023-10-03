@@ -16,7 +16,7 @@ public class HashtableOpenAddressLinearProbingImpl<T extends Storable> extends
 
 	@Override
 	public void insert(T element) {
-		if(isFull()) throw new HashtableOverflowException();
+		if(this.isFull()) throw new HashtableOverflowException();
 		if(element != null) {
 			int probTimes=0;
 			boolean insert = false;
@@ -83,8 +83,8 @@ public class HashtableOpenAddressLinearProbingImpl<T extends Storable> extends
 			while(found == false && probTimes < this.table.length){
 				int hashCode = ((HashFunctionLinearProbing<T>) this.hashFunction).hash(element, probTimes);
 				if(this.table[hashCode].equals(element)){
-					found = true;
 					out = hashCode;
+					found = true;
 				} else {
 					probTimes++;
 				}
