@@ -77,7 +77,7 @@ public class HashtableOpenAddressQuadraticProbingImpl<T extends Storable>
 	@Override
 	public int indexOf(T element) {
 		int out = -1;
-		if(element != null){
+		if(!this.isEmpty() && element != null){
 			int probTimes=0;
 			boolean found = false;
 			while(found == false && probTimes < this.table.length){

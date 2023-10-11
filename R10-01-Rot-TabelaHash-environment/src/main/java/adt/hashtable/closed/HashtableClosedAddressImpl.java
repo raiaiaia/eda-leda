@@ -6,6 +6,7 @@ import adt.hashtable.hashfunction.HashFunction;
 import adt.hashtable.hashfunction.HashFunctionClosedAddress;
 import adt.hashtable.hashfunction.HashFunctionClosedAddressMethod;
 import adt.hashtable.hashfunction.HashFunctionFactory;
+import adt.hashtable.open.HashtableOverflowException;
 import util.Util;
 
 public class HashtableClosedAddressImpl<T> extends
@@ -64,30 +65,32 @@ public class HashtableClosedAddressImpl<T> extends
 
 	@Override
 	public void insert(T element) {
-		if(element != null){
+		if(this.isFull()) throw new HashtableOverflowException();
+		if(element != null && !this.isFull()){
 			int hashCode = ((HashFunctionClosedAddress<T>) this.hashFunction).hash(element);
 			LinkedList<T> listIndex = (LinkedList<T>) this.table[hashCode];
 			if(listIndex == null){
 				listIndex = new LinkedList<T>();
 				listIndex.add(element);
 				this.table[hashCode] = listIndex;
+				this.elements++;
 			} else {
 				if(!listIndex.contains(element)){
 					listIndex.add(element);
 					this.COLLISIONS++;
+					this.elements++;
 				} else {
 					//sobrescreve o valor do index caso já exista elemento de mesmo valor na lista
 					int index = listIndex.indexOf(element);
 					listIndex.set(index, element);
 				}
 			}
-			this.elements++;
 		}
 	}
 
 	@Override
 	public void remove(T element) {
-		if(element != null){
+		if(element != null && !this.isEmpty()){
 			int hashCode = ((HashFunctionClosedAddress<T>) this.hashFunction).hash(element);
 			LinkedList<T> listIndex = (LinkedList<T>) this.table[hashCode];
 			if(listIndex != null && listIndex.contains(element)){

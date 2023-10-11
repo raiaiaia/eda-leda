@@ -107,4 +107,10 @@ public class StudentTestHashtableOpenAddressLinearProbing {
 		assertEquals(4, table1.size());
 	}
 
+	@Test
+	public void testDuplicatesValues(){
+		table1.insert(new HashtableElement(5));
+		assertEquals(4, table1.size());
+	}
+
 }

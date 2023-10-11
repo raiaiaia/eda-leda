@@ -88,5 +88,10 @@ public class StudentTestHashtableClosedAddressMultiplicationMethod {
 	public void testSize() {
 		assertEquals(80, table1.size());
 	}
-
+	
+	@Test
+	public void testDuplicatesValues(){
+		table1.insert(200);
+		assertEquals(80, table1.size());
+	}
 }

@@ -103,4 +103,10 @@ public class StudentTestHashtableOpenAddressQuadraticProbing {
 		assertEquals(7, table1.size());
 	}
 
+	@Test
+	public void testDuplicatesValues(){
+		table1.insert(new HashtableElement(2));
+		assertEquals(6, table1.size());
+	}
+
 }

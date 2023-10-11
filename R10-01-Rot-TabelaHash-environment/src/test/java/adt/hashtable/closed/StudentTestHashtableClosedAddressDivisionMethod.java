@@ -8,11 +8,14 @@ import org.junit.Test;
 import adt.hashtable.closed.AbstractHashtableClosedAddress;
 import adt.hashtable.closed.HashtableClosedAddressImpl;
 import adt.hashtable.hashfunction.HashFunctionClosedAddressMethod;
+import adt.hashtable.open.HashtableElement;
+import adt.hashtable.open.HashtableOverflowException;
 
 public class StudentTestHashtableClosedAddressDivisionMethod {
 
 	protected AbstractHashtableClosedAddress<Integer> table1;
 	protected AbstractHashtableClosedAddress<Integer> table2;
+	protected AbstractHashtableClosedAddress<Integer> table3;
 
 	protected final int PROPOSED_SIZE = 100;
 
@@ -29,6 +32,9 @@ public class StudentTestHashtableClosedAddressDivisionMethod {
 		}
 
 		table2 = new HashtableClosedAddressImpl<Integer>(PROPOSED_SIZE,
+				HashFunctionClosedAddressMethod.DIVISION);
+
+		table3 = new HashtableClosedAddressImpl<Integer>(5, 
 				HashFunctionClosedAddressMethod.DIVISION);
 	}
 
@@ -84,5 +90,26 @@ public class StudentTestHashtableClosedAddressDivisionMethod {
 	@Test
 	public void testSize() {
 		assertEquals(80, table1.size());
+	}
+
+	@Test
+	public void testDuplicatesValues(){
+		table1.insert(200);
+		assertEquals(80, table1.size());
+	}
+
+	@Test
+	public void testThresholdOverflow() throws HashtableOverflowException{
+		table3.insert(1);
+		table3.insert(1);
+		table3.insert(1);
+		table3.insert(1);
+		table3.insert(1);
+		table3.insert(1);
+	}
+	
+	@Test
+	public void testUnderFlow() throws Exception {
+		table3.remove(1);
 	}
 }
