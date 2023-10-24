@@ -1,5 +1,8 @@
 package adt.bst;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import adt.bt.BTNode;
 
 public class BSTImpl<T extends Comparable<T>> implements BST<T> {
@@ -192,23 +195,49 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 		}
 	}
 
-
 	@Override
 	public T[] preOrder() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		List<T> list = new ArrayList<>(this.size());
+		preOrder(list, this.root);
+		return list.toArray((T[]) new Comparable[this.size()]);
+	}
+
+	private void preOrder(List<T> list, BTNode<T> node) {
+		if (!node.isEmpty()) {
+			list.add(node.getData());
+			preOrder(list, node.getLeft());
+			preOrder(list, node.getRight());
+		}
 	}
 
 	@Override
 	public T[] order() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		List<T> list = new ArrayList<>(this.size());
+		order(list, this.root);
+		return list.toArray((T[]) new Comparable[this.size()]);
+	}
+
+	private void order(List<T> list, BTNode<T> node) {
+		if (!node.isEmpty()) {
+			order(list, node.getLeft());
+			list.add(node.getData());
+			order(list, node.getRight());
+		}
 	}
 
 	@Override
 	public T[] postOrder() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		List<T> list = new ArrayList<>(this.size());
+		postOrder(list, this.root);
+		return list.toArray((T[]) new Comparable[this.size()]);
+	}
+
+	private void postOrder(List<T> list, BTNode<T> node) {
+		if (!node.isEmpty()) {
+			postOrder(list, node.getLeft());
+			postOrder(list, node.getRight());
+			list.add(node.getData());
+		}
 	}
 
 	/**

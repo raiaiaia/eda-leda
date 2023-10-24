@@ -129,7 +129,7 @@ public class HeapImpl<T extends Comparable<T>> implements Heap<T> {
 	public T extractRootElement() {
 		T max = null;
 		if(!this.isEmpty()) {
-			if(index >= 1) {
+			if(index >= 0) {
 				max = rootElement();
 				this.heap[0] =  this.heap[index--];
 			}
@@ -147,11 +147,16 @@ public class HeapImpl<T extends Comparable<T>> implements Heap<T> {
 
 	@Override
 	public T[] heapsort(T[] array) {
-		buildHeap(array);
-			for(int i=array.length-1; i>=0; i--) {
-			array[i] = this.heap[0];
-			this.heap[0] =  this.heap[index--];
-			heapify(0);
+		if (array.length >= 2) {
+			buildHeap(array);
+			if (rootElement().compareTo(heap[index]) > 0) {
+				for (int i=index; i>=0; i--) {
+					array[i] = extractRootElement();
+				} 
+			} else {
+				for (int i=0; i<array.length; i++)
+					array[i] = extractRootElement();
+			}
 		}
 		return array;
 	}
