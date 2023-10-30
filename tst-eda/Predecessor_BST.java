@@ -4,48 +4,30 @@ import java.util.Scanner;
 public class Predecessor_BST {
 
     //falhou em 1 teste
-    
+
     static class Node {
         protected int value;
         protected Node left;
         protected Node right;
         protected Node parent;
 
-        Node(int v){
-            this.value = v;
-        }
-        
-        public Node getLeft() {
-            return left;
-        }
+        Node(int v){ this.value = v; }
 
-        public Node getParent() {
-            return parent;
-        }
+        public Node getLeft() { return left; }
 
-        public Node getRight() {
-            return right;
-        }
+        public Node getParent() { return parent; }
 
-        public int getValue() {
-            return value;
-        }
+        public Node getRight() { return right; }
 
-        public void setValue(int value) {
-            this.value = value;
-        }
+        public int getValue() { return value; }
 
-        public void setLeft(Node left) {
-            this.left = left;
-        }
+        public void setValue(int value) { this.value = value; }
 
-        public void setRight(Node right) {
-            this.right = right;
-        }
+        public void setLeft(Node left) { this.left = left; }
 
-        public void setParent(Node parent) {
-            this.parent = parent;
-        }
+        public void setRight(Node right) { this.right = right; }
+
+        public void setParent(Node parent) { this.parent = parent; }
     }
 
     static class BST {
@@ -60,9 +42,7 @@ public class Predecessor_BST {
             return (node.getLeft() == null) && (node.getRight() == null);
         }
 
-        public Node getRoot() {
-            return root;
-        }
+        public Node getRoot() { return root; }
 
         public void add(int element) {
             if(isEmpty()) this.root = new Node(element);
@@ -93,7 +73,6 @@ public class Predecessor_BST {
         public ArrayList<Integer> predecessor(Node node) {
 
             if(node != null) {
-                
                 if(isEmpty()) return null;
                 predecessor_path.add(node.getValue());
 

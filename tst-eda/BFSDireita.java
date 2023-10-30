@@ -1,8 +1,8 @@
-import java.util.Scanner;
+import java.util.*;
 
-public class ContaNos {
+public class BFSDireita {
 
-    //passou em todos os testes
+    //falha em todos os testes por erro de formatação da saída
 
     static class Node {
         protected int value;
@@ -38,16 +38,23 @@ public class ContaNos {
             return (node.getLeft() == null) && (node.getRight() == null);
         }
 
-        public Node getRoot() { return root; }
+        public ArrayList<Node> printBFS() {
+            Deque<Node> queue = new LinkedList<Node>();
+            ArrayList<Node> out = new ArrayList<>();
 
-        public int contaNos() {
-            return contaNos(this.root);
-        }
+            if(!isEmpty()) {
+                queue.addLast(this.root);
+                while(!queue.isEmpty()) {
+                    Node current = queue.removeFirst();
+                    out.add(current);
 
-        public int contaNos(Node node) {
-            if(node == null) return 0;
-            if(isLeaf(node)) return 0;
-            return 1 + contaNos(node.getLeft()) + contaNos(node.getRight());
+                    if(current.getRight() != null)
+                        queue.addLast(current.getRight());
+                    if(current.getLeft() != null)
+                        queue.addLast(current.getLeft());
+                }
+            }
+            return out;
         }
 
         public void add(int element) {
@@ -92,6 +99,12 @@ public class ContaNos {
         BST newBst = new BST(); //cria uma nova bst
         for(int value: values) newBst.add(value); //adiciona os valores a bst
         
-        System.out.println(newBst.contaNos());
+        ArrayList<Node> out = newBst.printBFS();
+        String print = "";
+        for(Node node: out) {
+            print += node.getValue() + " ";
+        }
+        print.trim();
+        System.out.println(print);
     }
 }

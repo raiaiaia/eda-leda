@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class ContaNos {
+public class SomaFolhas {
 
     //passou em todos os testes
 
@@ -38,16 +38,14 @@ public class ContaNos {
             return (node.getLeft() == null) && (node.getRight() == null);
         }
 
-        public Node getRoot() { return root; }
-
-        public int contaNos() {
-            return contaNos(this.root);
+        public int contaFolhas() {
+            return contaFolhas(this.root);
         }
 
-        public int contaNos(Node node) {
+        private int contaFolhas(Node node) {
             if(node == null) return 0;
-            if(isLeaf(node)) return 0;
-            return 1 + contaNos(node.getLeft()) + contaNos(node.getRight());
+            if(isLeaf(node)) return node.getValue();
+            return contaFolhas(node.getLeft()) + contaFolhas(node.getRight());
         }
 
         public void add(int element) {
@@ -92,6 +90,6 @@ public class ContaNos {
         BST newBst = new BST(); //cria uma nova bst
         for(int value: values) newBst.add(value); //adiciona os valores a bst
         
-        System.out.println(newBst.contaNos());
+        System.out.println(newBst.contaFolhas());
     }
 }
